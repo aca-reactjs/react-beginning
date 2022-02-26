@@ -1,4 +1,4 @@
-import { useState, Component } from "react";
+import { useState } from "react";
 
 import "./App.css";
 
@@ -14,54 +14,41 @@ const generateIds = () => {
 
 const getId = generateIds();
 
-class App extends Component {
-  state = {
-    textValue: "",
-    todoList: [],
+function App() {
+  const [textValue, setTextValue] = useState("");
+  const [todoList, setTodoList] = useState([]);
+
+  const handleInputChange = (e) => {
+    setTextValue(e.target.value);
   };
 
-  handleInputChange = (e) => {
-    this.setState({ ...this.state, textValue: e.target.value });
-  };
-
-  handleTodoFormSubmit = (e) => {
+  const handleTodoFormSubmit = (e) => {
     e.preventDefault();
 
     const newItem = {
       id: getId(),
-      text: this.state.textValue,
+      text: textValue,
     };
 
-    this.setState({
-      ...this.state,
-      textValue: "",
-      todoList: [...this.state.todoList, newItem],
-    });
+    setTodoList((prevState) => [...prevState, newItem]);
+    setTextValue("");
   };
 
-  render() {
-    return (
-      <div>
-        <div>
-          <form className="inputWrapper" onSubmit={this.handleTodoFormSubmit}>
-            <input
-              type="text"
-              value={this.state.textValue}
-              onChange={this.handleInputChange}
-            />
-            <button className="add">Add new Todo</button>
-          </form>
-        </div>
-        <div>
-          <ul>
-            {this.state.todoList.map((item) => (
-              <li key={item.id}>{item.text}</li>
-            ))}
-          </ul>
-        </div>
+  return (
+    <div>
+      <form className="todoForm" onSubmit={handleTodoFormSubmit}>
+        <input type="text" value={textValue} onChange={handleInputChange} />
+        <button className="add">Add new Todo</button>
+      </form>
+      <div className="listWrapper">
+        <ul>
+          {todoList.map((item) => (
+            <li key={item.id}>{item.text}</li>
+          ))}
+        </ul>
       </div>
-    );
-  }
+    </div>
+  );
 }
 
 export default App;
