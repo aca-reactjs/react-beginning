@@ -1,8 +1,18 @@
+.todoForm {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  margin: 1rem;
+  gap: 1rem;
+}
+
 input {
   font-size: 1.2rem;
   border: 1px solid red;
-  margin: 1rem;
+  margin-bottom: 1rem;
   outline: none;
+  border-radius: 5px;
+  padding: 5px;
 }
 
 .add {
@@ -10,10 +20,5 @@ input {
   background-color: transparent;
   font-size: 0.5rem;
   padding: 0.5rem;
-}
-
-.todoForm {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  margin-bottom: 1rem;
 }

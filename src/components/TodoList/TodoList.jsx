@@ -12,14 +12,18 @@ function TodoList({
       <ul className="todo-list">
         {todoItems.map((item) => {
           return item.isEditMode ? (
-            <form onSubmit={onTodoItemFormSubmit(item.id)} key={item.id}>
+            <form
+              className="todoForm"
+              onSubmit={onTodoItemFormSubmit(item.id)}
+              key={item.id}
+            >
               <input
                 type="text"
                 value={item.text}
                 onChange={onTodoItemChange(item.id)}
                 onBlur={onTodoItemFormSubmit(item.id)}
               />
-              <button>done</button>
+              <button className="add">done</button>
             </form>
           ) : (
             <li
