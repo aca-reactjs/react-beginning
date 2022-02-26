@@ -6,6 +6,7 @@ function TodoList({
   onItemClick,
   onTodoItemFormSubmit,
   onTodoItemChange,
+  OnItemDelete,
 }) {
   return (
     <div className="todoWrapper">
@@ -31,7 +32,8 @@ function TodoList({
               className="todo-listItem"
               key={item.id}
             >
-              {item.text}
+              <span>{item.text}</span>
+              <span onClick={OnItemDelete(item.id)}>X</span>
             </li>
           );
         })}

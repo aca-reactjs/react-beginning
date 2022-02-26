@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import getId from "./util/generateIds.util";
 import TodoForm from "./components/TodoForm/TodoForm";
@@ -8,8 +8,9 @@ import TodoList from "./components/TodoList/TodoList";
 
 function App() {
   const [textValue, setTextValue] = useState("");
-  const [todoList, setTodoList] = useState([]);
-  console.log(`🐞 / App / todoList`, todoList);
+  const [todoList, setTodoList] = useState(
+    JSON.parse(localStorage.getItem("todoItems")) || []
+  );
 
   const handleInputChange = (e) => {
     setTextValue(e.target.value);
@@ -66,6 +67,25 @@ function App() {
     );
   };
 
+  const handleItemDelete = (id) => (e) => {
+    e.stopPropagation();
+
+    setTodoList((prevState) => prevState.filter((item) => item.id !== id));
+  };
+
+  useEffect(() => {
+    console.log("I work");
+    const unload = () => {
+      localStorage.setItem("todoItems", JSON.stringify(todoList));
+    };
+
+    window.addEventListener("beforeunload", unload);
+
+    return () => {
+      window.removeEventListener("beforeunload", unload);
+    };
+  }, [todoList]);
+
   return (
     <div>
       <TodoForm
@@ -78,6 +98,7 @@ function App() {
         onItemClick={handleTodoItemClick}
         onTodoItemChange={handleTodoItemChange}
         onTodoItemFormSubmit={handleTodoItemFormSubmit}
+        OnItemDelete={handleItemDelete}
       />
     </div>
   );
