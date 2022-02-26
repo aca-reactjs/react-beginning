@@ -1,0 +1,19 @@
+input {
+  font-size: 1.2rem;
+  border: 1px solid red;
+  margin: 1rem;
+  outline: none;
+}
+
+.add {
+  border: 1px solid red;
+  background-color: transparent;
+  font-size: 0.5rem;
+  padding: 0.5rem;
+}
+
+.inputWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
