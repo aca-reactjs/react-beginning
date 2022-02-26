@@ -1,0 +1,22 @@
+.todoWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.todo-list {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  padding: 0;
+  width: 500px;
+}
+
+.todo-listItem {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 1rem;
+  border: 1px solid black;
+  list-style-type: none;
+}
